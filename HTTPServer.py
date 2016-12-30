@@ -13,13 +13,15 @@ class Handler(BaseHTTPRequestHandler):
 	def do_GET(self):
 		
 		#Parse path into dictionary and process
-		print self.path
+
 		url = urlparse.urlparse(self.path)
 		url_dict = urlparse.parse_qs(url.query)
-		
-		#Check if file path or API call
-			#If file path
-		print "PAGE REQUSTED!"
+
+		if self.path=='/':
+			self.path="index.html"
+			self.respond('text/html')
+			return
+
 		mimetype = mimetypes.guess_type(self.path)
 		mimetype = mimetype[0]
 		try:
